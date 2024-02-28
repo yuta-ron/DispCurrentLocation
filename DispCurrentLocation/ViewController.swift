@@ -61,10 +61,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     @IBAction func buttonTapped(_ sender: Any) {
-        print("1")
-        print(Bundle.main.url(forResource: "aichi", withExtension: "wav", subdirectory: "zundamon")?.absoluteURL.absoluteString)
-        if let soundURL = Bundle.main.url(forResource: "aichi", withExtension: "wav", subdirectory: "zundamon") {
-            print("2")
+        notifyByZundamon(prefecture: "nagasaki")
+    }
+    
+    
+    // Todo: リアルタイム通知的なことをやりたい
+    func notifyByZundamon(prefecture: String) {
+        if let soundURL = Bundle.main.url(forResource: prefecture, withExtension: "wav", subdirectory: "zundamon") {
             do {
                 audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
                 audioPlayer?.prepareToPlay()
@@ -73,7 +76,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 print("音声ファイルの読み込みに失敗しました。", error)
             }
         }
-        print("3")
     }
 }
 
