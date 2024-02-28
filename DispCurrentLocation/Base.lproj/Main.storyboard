@@ -16,12 +16,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCh-af-B5v">
-                                <rect key="frame" x="46.666666666666657" y="416" width="300" height="20.333333333333314"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" constant="300" id="Pky-Bw-hHL"/>
-                                </constraints>
-                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCh-af-B5v">
+                                <rect key="frame" x="39.333333333333343" y="409.33333333333331" width="314.33333333333326" height="33.666666666666686"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -30,6 +27,7 @@
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="yCh-af-B5v" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="9XK-4G-evW"/>
+                            <constraint firstItem="yCh-af-B5v" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.8" id="MJN-dj-Ucd"/>
                             <constraint firstItem="yCh-af-B5v" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="TkM-Yl-aKA"/>
                         </constraints>
                     </view>

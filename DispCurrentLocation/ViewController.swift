@@ -16,9 +16,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        myLabel.text = "神奈川県横浜市都筑区1丁目"
+        myLabel.text = "Loading..."
         myLabel.textAlignment = .center
-        myLabel.font = UIFont.systemFont(ofSize: 34)
+        myLabel.font = UIFont.systemFont(ofSize: 28)
 
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -32,9 +32,21 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
         if let location = locations.last {
-            let latitude = location.coordinate.latitude
-            let longitude = location.coordinate.longitude
-            print("Latitude: \(latitude), Longitude: \(longitude)")
+            let geocoder = CLGeocoder()
+            geocoder.reverseGeocodeLocation(location, preferredLocale: Locale(identifier: "ja_JP")) {(placemarks, error) in
+                guard let pms = placemarks else{
+                    return
+                }
+                let place = pms.first!
+                place
+                var locationStr = ""
+                locationStr.append(place.administrativeArea ?? "")
+                locationStr.append(place.subAdministrativeArea ?? "")
+                locationStr.append(place.locality!)
+                locationStr.append(place.thoroughfare!)
+                
+                self.myLabel.text = locationStr
+            }
         }
     }
     
