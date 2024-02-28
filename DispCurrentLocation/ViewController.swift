@@ -7,18 +7,23 @@
 
 import UIKit
 import CoreLocation
+import AVFoundation
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
-
-    @IBOutlet weak var myLabel: UILabel!
+    
+    
+    @IBOutlet var placeLabel: UILabel!
+    @IBOutlet var testButton: UIButton!
+    
     let locationManager = CLLocationManager()
+    var audioPlayer: AVAudioPlayer?
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        myLabel.text = "Loading..."
-        myLabel.textAlignment = .center
-        myLabel.font = UIFont.systemFont(ofSize: 28)
+        placeLabel.text = "Loading..."
+        placeLabel.textAlignment = .center
+        placeLabel.font = UIFont.systemFont(ofSize: 28)
 
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -38,14 +43,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                     return
                 }
                 let place = pms.first!
-                place
                 var locationStr = ""
                 locationStr.append(place.administrativeArea ?? "")
                 locationStr.append(place.subAdministrativeArea ?? "")
                 locationStr.append(place.locality!)
                 locationStr.append(place.thoroughfare!)
                 
-                self.myLabel.text = locationStr
+                self.placeLabel.text = locationStr
             }
         }
     }
@@ -54,6 +58,22 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         if status == .authorizedWhenInUse || status == .authorizedAlways {
             locationManager.startUpdatingLocation() // 許可されたら位置情報の取得を開始
         }
+    }
+    
+    @IBAction func buttonTapped(_ sender: Any) {
+        print("1")
+        print(Bundle.main.url(forResource: "aichi", withExtension: "wav", subdirectory: "zundamon")?.absoluteURL.absoluteString)
+        if let soundURL = Bundle.main.url(forResource: "aichi", withExtension: "wav", subdirectory: "zundamon") {
+            print("2")
+            do {
+                audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
+                audioPlayer?.prepareToPlay()
+                audioPlayer?.play()
+            } catch {
+                print("音声ファイルの読み込みに失敗しました。", error)
+            }
+        }
+        print("3")
     }
 }
 
