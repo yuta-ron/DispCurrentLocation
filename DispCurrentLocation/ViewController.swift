@@ -8,6 +8,7 @@
 import UIKit
 import CoreLocation
 import AVFoundation
+import UserNotifications
 
 class ViewController: UIViewController, CLLocationManagerDelegate {
     
@@ -33,6 +34,25 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         // アプリ使用中の位置情報の許可をユーザに求める
         locationManager.startUpdatingLocation() // 位置情報の取得を開始
+        
+        
+        
+        // Notification
+        UNUserNotificationCenter.current().removeAllPendingNotificationRequests()
+        UNUserNotificationCenter.current().requestAuthorization(options: [.badge, .alert, .sound]) { (granted, error) in
+            guard granted else {
+                return
+            }
+            let content = UNMutableNotificationContent()
+            content.title = "Test"
+            content.body = "Notification"
+            content.sound = .none
+            let trigger = UNTimeIntervalNotificationTrigger.init(timeInterval: TimeInterval(3), repeats: false)
+            let request = UNNotificationRequest.init(identifier: "identifier-1", content: content, trigger: trigger)
+            UNUserNotificationCenter.current().add(request)
+            print("add")
+        }
+        //
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -74,6 +94,29 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 audioPlayer?.play()
             } catch {
                 print("音声ファイルの読み込みに失敗しました。", error)
+            }
+        }
+        
+        sendNotification()
+    }
+    
+    func sendNotification() {
+        let content = UNMutableNotificationContent()
+        content.title = NSString.localizedUserNotificationString(forKey: "タイトル", arguments: nil)
+        content.body = NSString.localizedUserNotificationString(forKey: "メッセージ内容", arguments: nil)
+        // content.sound = UNNotificationSound(named: UNNotificationSoundName(rawValue: soundName))
+        
+        // トリガーを設定（ここでは5秒後に設定）
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
+
+        // リクエストを作成
+        let request = UNNotificationRequest(identifier: "CustomSoundNotification", content: content, trigger: trigger)
+
+        // リクエストを通知センターに追加
+        let center = UNUserNotificationCenter.current()
+        center.add(request) { (error : Error?) in
+            if let theError = error {
+                print(theError.localizedDescription)
             }
         }
     }
