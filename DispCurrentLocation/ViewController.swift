@@ -18,6 +18,8 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     let locationManager = CLLocationManager()
     var audioPlayer: AVAudioPlayer?
+    
+    var currentPrefecture = ""
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -51,6 +53,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 locationStr.append(place.thoroughfare!)
                 
                 self.placeLabel.text = locationStr
+                
+                // 都道府県超え検知
+                if ((self.currentPrefecture != place.administrativeArea) && (self.currentPrefecture != "")) {
+                    self.notifyByZundamon(prefectureName: place.administrativeArea!)                    
+                }
+                
+                self.currentPrefecture = place.administrativeArea!
             }
         }
     }
