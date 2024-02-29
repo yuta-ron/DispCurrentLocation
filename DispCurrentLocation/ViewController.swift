@@ -56,7 +56,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 
                 // 都道府県超え検知
                 if ((self.currentPrefecture != place.administrativeArea) && (self.currentPrefecture != "")) {
-                    self.notifyByZundamon(prefectureName: place.administrativeArea!)                    
+                    self.notifyByZundamon(prefectureName: place.administrativeArea!)
                 }
                 
                 self.currentPrefecture = place.administrativeArea!
@@ -75,22 +75,32 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     func notifyByZundamon(prefectureName: String) {
-        // フォアグラウンドだったら
-//        guard let soundURL = getSoundUrl(prefecture: prefecture) else {
-//            print("音声ファイルの読み込みに失敗しました。")
-//            return;
-//        }
-//        
-//        do {
-//            audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
-//            audioPlayer?.prepareToPlay()
-//            audioPlayer?.play()
-//        } catch {
-//            print("音声ファイルの再生に失敗しました", error)
-//        }
+        sleep(3)
         
-        // バックグラウンドだったら
-        sendNotification(prefectureName: prefectureName)
+        // フォアグラウンドだったら
+        switch UIApplication.shared.applicationState {
+            case .active, .inactive:
+                speechZundamon(prefectureName: prefectureName)
+            case .background:
+                sendNotification(prefectureName: prefectureName)
+            default:
+                return
+        }
+    }
+    
+    func speechZundamon(prefectureName: String) {
+        guard let soundURL = getSoundUrl(prefectureName: prefectureName) else {
+            print("音声ファイルの読み込みに失敗しました。")
+            return;
+        }
+
+        do {
+            audioPlayer = try AVAudioPlayer(contentsOf: soundURL)
+            audioPlayer?.prepareToPlay()
+            audioPlayer?.play()
+        } catch {
+            print("音声ファイルの再生に失敗しました", error)
+        }
     }
     
     func sendNotification(prefectureName: String) {
@@ -107,8 +117,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
 
         // トリガーを設定（ここでは5秒後に設定）
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 5, repeats: false)
-
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0, repeats: false)
         // リクエストを作成
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         // リクエストを通知センターに追加
