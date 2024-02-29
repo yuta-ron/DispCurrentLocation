@@ -34,17 +34,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         // アプリ使用中の位置情報の許可をユーザに求める
         locationManager.startUpdatingLocation() // 位置情報の取得を開始
-        
-        // 通知音声は専用ディレクトリ管理なので
-        // お掃除
-//        disposeSoundFiles()
-//        
-//        do {
-//            try FileManager.default.createDirectory(at: getNotificationSoundDirUrl(), withIntermediateDirectories: true, attributes: nil)
-//            print("ディレクトリ作成に成功しました")
-//        } catch {
-//            print("ディレクトリ作成に失敗しました")
-//        }
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -60,8 +49,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 locationStr.append(place.subAdministrativeArea ?? "")
                 locationStr.append(place.locality!)
                 locationStr.append(place.thoroughfare!)
-                
-                print(place)
                 
                 self.placeLabel.text = locationStr
             }
