@@ -20,6 +20,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var audioPlayer: AVAudioPlayer?
     
     var currentPrefecture = ""
+    var isBackground = false;
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -36,6 +37,18 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         // アプリ使用中の位置情報の許可をユーザに求める
         locationManager.startUpdatingLocation() // 位置情報の取得を開始
+        
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(foreground(notification:)),
+                                               name: UIApplication.willEnterForegroundNotification,
+                                               object: nil
+        )
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(background(notification:)),
+                                               name: UIApplication.didEnterBackgroundNotification,
+                                               object: nil
+        )
     }
     
     func locationManager(_ manager: CLLocationManager, didUpdateLocations locations: [CLLocation]) {
@@ -71,20 +84,44 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     @IBAction func buttonTapped(_ sender: Any) {
-        notifyByZundamon(prefectureName: "長崎県")
+//        print("sleep start")
+//        sleep(3)
+//        print("sleep end")
+
+//        isBackground = true
+        notifyByZundamon(prefectureName: "三重県")
     }
     
+    // 並行処理にする必要がある。同期処理なので判定に失敗してそう。
     func notifyByZundamon(prefectureName: String) {
-        sleep(3)
+        // Todo: バックグラウンドとフォアグランドの判定どうやるねん.....
+        // これ動かないんだが
+//        for i in 0...10000 {
+//            if (UIApplication.shared.applicationState == .active) {
+//                print("Active");
+//            } else if (UIApplication.shared.applicationState == .inactive)  {
+//                print("Inactive");
+//            } else if (UIApplication.shared.applicationState == .background)  {
+//                print("Background");
+//            }
+//            sleep(1)
+//        }
+                
+//        print(UIApplication.shared.applicationState)
+//        // フォアグラウンドだったら
+//        switch UIApplication.shared.applicationState {
+//            case .active, .inactive:
+//                speechZundamon(prefectureName: prefectureName)
+//            case .background:
+//                sendNotification(prefectureName: prefectureName)
+//            default:
+//                return
+//        }
         
-        // フォアグラウンドだったら
-        switch UIApplication.shared.applicationState {
-            case .active, .inactive:
-                speechZundamon(prefectureName: prefectureName)
-            case .background:
-                sendNotification(prefectureName: prefectureName)
-            default:
-                return
+        if (isBackground) {
+            sendNotification(prefectureName: prefectureName)
+        } else {
+            speechZundamon(prefectureName: prefectureName)
         }
     }
     
@@ -110,14 +147,13 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         let alphaName = prefectureNameToAlpha(prefectureName: prefectureName)
         if (alphaName != nil) {
-            print(alphaName!)
-            content.sound = UNNotificationSound(named: UNNotificationSoundName("\(alphaName!).mp3"))
+            content.sound = UNNotificationSound(named: UNNotificationSoundName("zundamon/\(alphaName!).mp3"))
         } else {
             content.sound = .default
         }
 
         // トリガーを設定（ここでは5秒後に設定）
-        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 0, repeats: false)
+        let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
         // リクエストを作成
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
         // リクエストを通知センターに追加
@@ -188,6 +224,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             ]
 
             return codes.first(where: { $0.key == prefectureName })?.value
+    }
+    
+    @objc func foreground(notification: Notification) {
+        self.isBackground = false
+        print("フォアグラウンド")
+    }
+    
+    @objc func background(notification: Notification) {
+        self.isBackground = true
+        print("バックグラウンド")
     }
 }
 
