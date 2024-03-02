@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="22505" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES" initialViewController="BYZ-38-t0r">
-    <device id="retina6_12" orientation="portrait" appearance="light"/>
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
     <dependencies>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="22504"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
@@ -13,17 +13,11 @@
             <objects>
                 <viewController id="BYZ-38-t0r" customClass="ViewController" customModule="DispCurrentLocation" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="8bC-Xf-vdC">
-                        <rect key="frame" x="0.0" y="0.0" width="393" height="852"/>
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCh-af-B5v">
-                                <rect key="frame" x="39.333333333333343" y="409.33333333333331" width="314.33333333333326" height="33.666666666666686"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Et-Jk-BKo">
-                                <rect key="frame" x="159" y="578" width="75" height="35"/>
+                                <rect key="frame" x="153" y="509" width="108" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
@@ -31,26 +25,43 @@
                                     <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ylw-wz-BCJ"/>
                                 </connections>
                             </button>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCh-af-B5v">
+                                <rect key="frame" x="174" y="431.5" width="66.5" height="33.5"/>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="thinking_zundamon.png" translatesAutoresizingMaskIntoConstraints="NO" id="THu-8B-5HN">
+                                <rect key="frame" x="256" y="640" width="138" height="200"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" constant="138" id="ZIv-UR-jLS"/>
+                                    <constraint firstAttribute="height" constant="200" id="xN7-md-GYQ"/>
+                                </constraints>
+                            </imageView>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="yCh-af-B5v" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="9XK-4G-evW"/>
-                            <constraint firstItem="yCh-af-B5v" firstAttribute="width" secondItem="6Tk-OE-BBY" secondAttribute="width" multiplier="0.8" id="MJN-dj-Ucd"/>
-                            <constraint firstItem="yCh-af-B5v" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="TkM-Yl-aKA"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="THu-8B-5HN" secondAttribute="bottom" constant="22" id="3a2-s1-CQl"/>
+                            <constraint firstItem="yCh-af-B5v" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="CEd-mi-ghC"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="THu-8B-5HN" secondAttribute="trailing" constant="20" id="ESP-4T-SGD"/>
+                            <constraint firstItem="THu-8B-5HN" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="YgQ-fz-Rah"/>
+                            <constraint firstItem="yCh-af-B5v" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lYs-5K-Dbo"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="placeLabel" destination="yCh-af-B5v" id="DJF-gn-Gh4"/>
                         <outlet property="testButton" destination="1Et-Jk-BKo" id="QSz-e3-C3v"/>
+                        <outlet property="zundamonImage" destination="THu-8B-5HN" id="lvf-Jc-di4"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="46.564885496183201" y="-2.1126760563380285"/>
+            <point key="canvasLocation" x="37.681159420289859" y="-8.7053571428571423"/>
         </scene>
     </scenes>
     <resources>
+        <image name="thinking_zundamon.png" width="590.18182373046875" height="900"/>
         <systemColor name="systemBackgroundColor">
             <color white="1" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
         </systemColor>

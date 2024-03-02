@@ -15,7 +15,12 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     @IBOutlet var placeLabel: UILabel!
     @IBOutlet var testButton: UIButton!
+    @IBOutlet var zundamonImage: UIImageView!
+    @IBOutlet var zundamonImageHeightConstraint: NSLayoutConstraint!
+    @IBOutlet var zundamonImageWidthConstraint: NSLayoutConstraint!
     
+    // 消して良いかも
+    @IBOutlet var zundamonImageTrailingConstraint: NSLayoutConstraint!
     let locationManager = CLLocationManager()
     var audioPlayer: AVAudioPlayer?
     
@@ -235,5 +240,26 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         self.isBackground = true
         print("バックグラウンド")
     }
+    
+    override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
+        super.viewWillTransition(to: size, with: coordinator)
+        
+        if (self.zundamonImageHeightConstraint == nil) {
+            return
+        }
+        
+        coordinator.animate(alongsideTransition: { _ in
+            if UIDevice.current.orientation.isLandscape {
+                // 横画面の場合の制約
+                self.zundamonImageHeightConstraint.constant = self.view.frame.height * 0.3
+                self.zundamonImageWidthConstraint.constant =  self.view.frame.width * 0.25
+            } else {
+                // 縦画面の場合の制約
+                self.zundamonImageHeightConstraint.constant = self.view.frame.height * 0.4
+                self.zundamonImageWidthConstraint.constant =  self.view.frame.width * 0.3
+            }
+            
+            self.view.layoutIfNeeded()
+        }, completion: nil)
+    }
 }
-

@@ -17,6 +17,7 @@
 		9805E2B62B8AFF35006BD0EB /* DispCurrentLocationUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9805E2B52B8AFF35006BD0EB /* DispCurrentLocationUITests.swift */; };
 		9805E2B82B8AFF35006BD0EB /* DispCurrentLocationUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9805E2B72B8AFF35006BD0EB /* DispCurrentLocationUITestsLaunchTests.swift */; };
 		98D25C6D2B8F890E00F79A5D /* zundamon in Resources */ = {isa = PBXBuildFile; fileRef = 98D25C6C2B8F890E00F79A5D /* zundamon */; };
+		98E335662B92139B002DB8A5 /* thinking_zundamon.png in Resources */ = {isa = PBXBuildFile; fileRef = 98E335652B92139A002DB8A5 /* thinking_zundamon.png */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +52,7 @@
 		9805E2B52B8AFF35006BD0EB /* DispCurrentLocationUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispCurrentLocationUITests.swift; sourceTree = "<group>"; };
 		9805E2B72B8AFF35006BD0EB /* DispCurrentLocationUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DispCurrentLocationUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		98D25C6C2B8F890E00F79A5D /* zundamon */ = {isa = PBXFileReference; lastKnownFileType = folder; name = zundamon; path = ../../../../../Desktop/zundamon; sourceTree = "<group>"; };
+		98E335652B92139A002DB8A5 /* thinking_zundamon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = thinking_zundamon.png; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -105,6 +107,7 @@
 				9805E2962B8AFF34006BD0EB /* SceneDelegate.swift */,
 				9805E2982B8AFF34006BD0EB /* ViewController.swift */,
 				9805E29A2B8AFF34006BD0EB /* Main.storyboard */,
+				98E335652B92139A002DB8A5 /* thinking_zundamon.png */,
 				9805E29D2B8AFF35006BD0EB /* Assets.xcassets */,
 				98D25C6C2B8F890E00F79A5D /* zundamon */,
 				9805E29F2B8AFF35006BD0EB /* LaunchScreen.storyboard */,
@@ -236,6 +239,7 @@
 			files = (
 				98D25C6D2B8F890E00F79A5D /* zundamon in Resources */,
 				9805E2A12B8AFF35006BD0EB /* LaunchScreen.storyboard in Resources */,
+				98E335662B92139B002DB8A5 /* thinking_zundamon.png in Resources */,
 				9805E29E2B8AFF35006BD0EB /* Assets.xcassets in Resources */,
 				9805E29C2B8AFF34006BD0EB /* Main.storyboard in Resources */,
 			);
