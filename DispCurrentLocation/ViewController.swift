@@ -87,11 +87,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         }
     }
     
+    // 動作テスト用ボタン
     @IBAction func buttonTapped(_ sender: Any) {
-        notifyByZundamon(prefectureName: "三重県")
+        notifyByZundamon(prefectureName: "石川県")
     }
     
-    // 並行処理にする必要がある。同期処理なので判定に失敗してそう。
     func notifyByZundamon(prefectureName: String) {
         if (isBackground) {
             sendNotification(prefectureName: prefectureName)
@@ -127,7 +127,7 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
             content.sound = .default
         }
 
-        // トリガーを設定（ここでは5秒後に設定）
+        // トリガーを設定（ここでは3秒後に設定）
         let trigger = UNTimeIntervalNotificationTrigger(timeInterval: 3, repeats: false)
         // リクエストを作成
         let request = UNNotificationRequest(identifier: UUID().uuidString, content: content, trigger: trigger)
