@@ -32,7 +32,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="thinking_zundamon.png" translatesAutoresizingMaskIntoConstraints="NO" id="THu-8B-5HN">
-                                <rect key="frame" x="256" y="640" width="138" height="200"/>
+                                <rect key="frame" x="276" y="662" width="138" height="200"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="138" id="ZIv-UR-jLS"/>
                                     <constraint firstAttribute="height" constant="200" id="xN7-md-GYQ"/>
@@ -42,10 +42,9 @@
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="THu-8B-5HN" secondAttribute="bottom" constant="22" id="3a2-s1-CQl"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="THu-8B-5HN" secondAttribute="bottom" id="3a2-s1-CQl"/>
                             <constraint firstItem="yCh-af-B5v" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="CEd-mi-ghC"/>
-                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="THu-8B-5HN" secondAttribute="trailing" constant="20" id="ESP-4T-SGD"/>
-                            <constraint firstItem="THu-8B-5HN" firstAttribute="trailing" secondItem="8bC-Xf-vdC" secondAttribute="trailingMargin" id="YgQ-fz-Rah"/>
+                            <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="THu-8B-5HN" secondAttribute="trailing" id="ESP-4T-SGD"/>
                             <constraint firstItem="yCh-af-B5v" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lYs-5K-Dbo"/>
                         </constraints>
                     </view>
@@ -53,6 +52,8 @@
                         <outlet property="placeLabel" destination="yCh-af-B5v" id="DJF-gn-Gh4"/>
                         <outlet property="testButton" destination="1Et-Jk-BKo" id="QSz-e3-C3v"/>
                         <outlet property="zundamonImage" destination="THu-8B-5HN" id="lvf-Jc-di4"/>
+                        <outlet property="zundamonImageHeightConstraint" destination="xN7-md-GYQ" id="8mG-QH-ros"/>
+                        <outlet property="zundamonImageWidthConstraint" destination="ZIv-UR-jLS" id="bzy-0R-F8V"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>

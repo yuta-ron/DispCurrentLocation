@@ -32,7 +32,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         placeLabel.text = "Loading..."
         placeLabel.textAlignment = .center
-        placeLabel.font = UIFont.systemFont(ofSize: 28)
         
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
@@ -89,40 +88,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     }
     
     @IBAction func buttonTapped(_ sender: Any) {
-//        print("sleep start")
-//        sleep(3)
-//        print("sleep end")
-
-//        isBackground = true
         notifyByZundamon(prefectureName: "三重県")
     }
     
     // 並行処理にする必要がある。同期処理なので判定に失敗してそう。
     func notifyByZundamon(prefectureName: String) {
-        // Todo: バックグラウンドとフォアグランドの判定どうやるねん.....
-        // これ動かないんだが
-//        for i in 0...10000 {
-//            if (UIApplication.shared.applicationState == .active) {
-//                print("Active");
-//            } else if (UIApplication.shared.applicationState == .inactive)  {
-//                print("Inactive");
-//            } else if (UIApplication.shared.applicationState == .background)  {
-//                print("Background");
-//            }
-//            sleep(1)
-//        }
-                
-//        print(UIApplication.shared.applicationState)
-//        // フォアグラウンドだったら
-//        switch UIApplication.shared.applicationState {
-//            case .active, .inactive:
-//                speechZundamon(prefectureName: prefectureName)
-//            case .background:
-//                sendNotification(prefectureName: prefectureName)
-//            default:
-//                return
-//        }
-        
         if (isBackground) {
             sendNotification(prefectureName: prefectureName)
         } else {
@@ -243,20 +213,20 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
         super.viewWillTransition(to: size, with: coordinator)
-        
-        if (self.zundamonImageHeightConstraint == nil) {
-            return
-        }
-        
+
         coordinator.animate(alongsideTransition: { _ in
             if UIDevice.current.orientation.isLandscape {
                 // 横画面の場合の制約
-                self.zundamonImageHeightConstraint.constant = self.view.frame.height * 0.3
-                self.zundamonImageWidthConstraint.constant =  self.view.frame.width * 0.25
+                self.zundamonImageHeightConstraint.constant = self.view.frame.height * 0.5
+                self.zundamonImageWidthConstraint.constant =  self.view.frame.width * 0.2
+                self.placeLabel.font = UIFont.systemFont(ofSize: 42)
+                print("horisontal")
             } else {
                 // 縦画面の場合の制約
-                self.zundamonImageHeightConstraint.constant = self.view.frame.height * 0.4
-                self.zundamonImageWidthConstraint.constant =  self.view.frame.width * 0.3
+                self.zundamonImageHeightConstraint.constant = self.view.frame.height * 0.3
+                self.zundamonImageWidthConstraint.constant =  self.view.frame.width * 0.4
+                self.placeLabel.font = UIFont.systemFont(ofSize: 36)
+                print("vertical")
             }
             
             self.view.layoutIfNeeded()
