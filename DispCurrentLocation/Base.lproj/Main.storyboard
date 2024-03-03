@@ -17,7 +17,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1Et-Jk-BKo">
-                                <rect key="frame" x="153" y="509" width="108" height="22"/>
+                                <rect key="frame" x="153" y="550" width="108" height="22"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="plain" title="Button"/>
@@ -25,12 +25,6 @@
                                     <action selector="buttonTapped:" destination="BYZ-38-t0r" eventType="touchUpInside" id="Ylw-wz-BCJ"/>
                                 </connections>
                             </button>
-                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="0" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCh-af-B5v">
-                                <rect key="frame" x="174" y="431.5" width="66.5" height="33.5"/>
-                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
-                                <nil key="textColor"/>
-                                <nil key="highlightedColor"/>
-                            </label>
                             <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" image="thinking_zundamon.png" translatesAutoresizingMaskIntoConstraints="NO" id="THu-8B-5HN">
                                 <rect key="frame" x="276" y="662" width="138" height="200"/>
                                 <constraints>
@@ -38,6 +32,15 @@
                                     <constraint firstAttribute="height" constant="200" id="xN7-md-GYQ"/>
                                 </constraints>
                             </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="characterWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="yCh-af-B5v">
+                                <rect key="frame" x="174" y="373" width="66.5" height="150"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="150" id="OKL-gE-FDk"/>
+                                </constraints>
+                                <fontDescription key="fontDescription" style="UICTFontTextStyleTitle1"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
@@ -45,6 +48,8 @@
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="bottom" secondItem="THu-8B-5HN" secondAttribute="bottom" id="3a2-s1-CQl"/>
                             <constraint firstItem="yCh-af-B5v" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="CEd-mi-ghC"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="THu-8B-5HN" secondAttribute="trailing" id="ESP-4T-SGD"/>
+                            <constraint firstItem="yCh-af-B5v" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Jnn-6Z-DnY"/>
+                            <constraint firstItem="yCh-af-B5v" firstAttribute="centerY" secondItem="8bC-Xf-vdC" secondAttribute="centerY" id="XRU-QW-1LR"/>
                             <constraint firstItem="yCh-af-B5v" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="lYs-5K-Dbo"/>
                         </constraints>
                     </view>

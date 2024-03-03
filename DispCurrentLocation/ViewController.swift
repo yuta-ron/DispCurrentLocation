@@ -25,19 +25,26 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var audioPlayer: AVAudioPlayer?
     
     var currentPrefecture = ""
+    // For Debug
+    var currentSubLocality = ""
+    
     var isBackground = false;
 
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        placeLabel.text = "Loading..."
+        placeLabel.numberOfLines = 0 //折り返し
+         placeLabel.text = "Loading..."
+//        placeLabel.text = "長崎県西彼杵郡時津町左底郷12345678あああああああああああああああ"
+//        return;
         placeLabel.textAlignment = .center
         
         locationManager.delegate = self
         locationManager.requestWhenInUseAuthorization()
         
-        locationManager.desiredAccuracy = kCLDistanceFilterNone
-        locationManager.distanceFilter = 500;
+        // locationManager.desiredAccuracy = kCLDistanceFilterNone
+        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
+        // locationManager.distanceFilter = 500;
         
         // アプリ使用中の位置情報の許可をユーザに求める
         locationManager.startUpdatingLocation() // 位置情報の取得を開始
@@ -63,16 +70,23 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                     return
                 }
                 let place = pms.first!
+                
                 var locationStr = ""
                 locationStr.append(place.administrativeArea ?? "")
                 locationStr.append(place.subAdministrativeArea ?? "")
-                locationStr.append(place.locality!)
-                locationStr.append(place.thoroughfare!)
+                locationStr.append(place.locality ?? "")
+                locationStr.append(place.subLocality ?? "")
+                locationStr.append(place.thoroughfare ?? "")
                 
                 self.placeLabel.text = locationStr
                 
                 // 都道府県超え検知
                 if ((self.currentPrefecture != place.administrativeArea) && (self.currentPrefecture != "")) {
+                    self.notifyByZundamon(prefectureName: place.administrativeArea!)
+                }
+                
+                // For Notification Debug
+                if ((self.currentSubLocality != place.subLocality) && (self.currentSubLocality != "")) {
                     self.notifyByZundamon(prefectureName: place.administrativeArea!)
                 }
                 
