@@ -25,9 +25,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     var audioPlayer: AVAudioPlayer?
     
     var currentPrefecture = ""
-    // For Debug
-    var currentSubLocality = ""
-    
     var isBackground = false;
 
     override func viewDidLoad() {
@@ -35,20 +32,16 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
         
         placeLabel.numberOfLines = 0 //折り返し
          placeLabel.text = "Loading..."
-//        placeLabel.text = "長崎県西彼杵郡時津町左底郷12345678あああああああああああああああ"
-//        return;
         placeLabel.textAlignment = .center
         
         locationManager.delegate = self
-        locationManager.requestWhenInUseAuthorization()
+        locationManager.requestAlwaysAuthorization()
         
-        // locationManager.desiredAccuracy = kCLDistanceFilterNone
-        locationManager.desiredAccuracy = kCLLocationAccuracyHundredMeters
-        // locationManager.distanceFilter = 500;
+        locationManager.desiredAccuracy = kCLDistanceFilterNone
+        locationManager.distanceFilter =  150
         
         // アプリ使用中の位置情報の許可をユーザに求める
         locationManager.startUpdatingLocation() // 位置情報の取得を開始
-        
         
         NotificationCenter.default.addObserver(self,
                                                selector: #selector(foreground(notification:)),
@@ -69,7 +62,9 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 guard let pms = placemarks else{
                     return
                 }
-                let place = pms.first!
+                guard let place = pms.first else{
+                    return
+                }
                 
                 var locationStr = ""
                 locationStr.append(place.administrativeArea ?? "")
@@ -82,11 +77,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 
                 // 都道府県超え検知
                 if ((self.currentPrefecture != place.administrativeArea) && (self.currentPrefecture != "")) {
-                    self.notifyByZundamon(prefectureName: place.administrativeArea!)
-                }
-                
-                // For Notification Debug
-                if ((self.currentSubLocality != place.subLocality) && (self.currentSubLocality != "")) {
                     self.notifyByZundamon(prefectureName: place.administrativeArea!)
                 }
                 
@@ -132,7 +122,6 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     func sendNotification(prefectureName: String) {
         let content = UNMutableNotificationContent()
         content.title = NSString.localizedUserNotificationString(forKey: "\(prefectureName)に入りました", arguments: nil)
-//        content.body = NSString.localizedUserNotificationString(forKey: "メッセージ内容", arguments: nil)
         
         let alphaName = prefectureNameToAlpha(prefectureName: prefectureName)
         if (alphaName != nil) {
@@ -217,12 +206,10 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
     
     @objc func foreground(notification: Notification) {
         self.isBackground = false
-        print("フォアグラウンド")
     }
     
     @objc func background(notification: Notification) {
         self.isBackground = true
-        print("バックグラウンド")
     }
     
     override func viewWillTransition(to size: CGSize, with coordinator: UIViewControllerTransitionCoordinator) {
@@ -234,13 +221,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 self.zundamonImageHeightConstraint.constant = self.view.frame.height * 0.5
                 self.zundamonImageWidthConstraint.constant =  self.view.frame.width * 0.2
                 self.placeLabel.font = UIFont.systemFont(ofSize: 42)
-                print("horisontal")
             } else {
                 // 縦画面の場合の制約
                 self.zundamonImageHeightConstraint.constant = self.view.frame.height * 0.3
                 self.zundamonImageWidthConstraint.constant =  self.view.frame.width * 0.4
                 self.placeLabel.font = UIFont.systemFont(ofSize: 36)
-                print("vertical")
             }
             
             self.view.layoutIfNeeded()
