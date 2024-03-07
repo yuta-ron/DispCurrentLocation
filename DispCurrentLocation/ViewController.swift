@@ -71,8 +71,11 @@ class ViewController: UIViewController, CLLocationManagerDelegate {
                 locationStr.append(place.subAdministrativeArea ?? "")
                 locationStr.append(place.locality ?? "")
                 locationStr.append(place.subLocality ?? "")
-                locationStr.append(place.thoroughfare ?? "")
-                
+                // 丁目の概念がない土地の場合、subLocalityとthoroughfareが同じになるため分岐
+                if (place.subLocality != place.thoroughfare) {
+                    locationStr.append(place.thoroughfare ?? "")
+                }
+
                 self.placeLabel.text = locationStr
                 
                 // 都道府県超え検知
